@@ -1,0 +1,6 @@
+<sleepless-godspeed>
+    <!-- TODO: remove this file once testing is complete -->
+    <set xpath="/entity_classes/entity_class[@name='playerMale']/property[@name='ItemsOnEnterGame.GameModeSurvival']/@value">medicalFirstAidKitTest1,drinkCanMegaCrushTest1</set>
+    <set xpath="/entity_classes/entity_class[@name='playerMale']/property[@name='ItemsOnEnterGame.GameModeSurvivalSP']/@value">medicalFirstAidKitTest1,drinkCanMegaCrushTest1</set>
+    <set xpath="/entity_classes/entity_class[@name='playerMale']/property[@name='ItemsOnEnterGame.GameModeSurvivalMP']/@value">medicalFirstAidKitTest1,drinkCanMegaCrushTest1</set>
+</sleepless-godspeed>
