@@ -1,0 +1,10 @@
+<sleepless-godspeed>
+    <append xpath="/Sounds">
+        <SoundDataNode name="player_godspeed"> <AudioSource name="Sounds/AudioSource_VO"/>
+            <Noise ID="1" noise="7" time="3" muffled_when_crouched="0.5"/>
+            <!-- rekt saying "Godspeed" in a somewhat chilled out manner -->
+            <AudioClip ClipName="Sounds/VO/Trader/Male/Like/trader_male_like_quest_accepted_05"/>
+            <LocalCrouchVolumeScale value="1.0"/> <CrouchNoiseScale value="0.5"/> <NoiseScale value="1"/> <MaxVoices value="10"/> <MaxRepeatRate value="1.111"/>
+        </SoundDataNode>
+    </append>
+</sleepless-godspeed>
