@@ -1,9 +1,7 @@
 <sleepless-godspeed>
     <append xpath="/items">
         <item name="drugGodspeed">
-            <property name="CustomIcon" value="drugPainkillers"/>
-                <property name="CustomIconTint" value="ff9f9f"/>
-                <!-- <property name="CustomIconTint" value="ff8c00"/> -->
+            <property name="CustomIcon" value="drugPainkillers"/> <property name="CustomIconTint" value="ff8c00"/>
             <property name="Tags" value="medical"/>
             <property name="DisplayType" value="medicalVitamins"/>
             <property name="HoldType" value="16"/>
