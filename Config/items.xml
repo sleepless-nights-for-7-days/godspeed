@@ -3,13 +3,13 @@
         <item name="drugGodspeed">
             <property name="CustomIcon" value="drugPainkillers"/> <property name="CustomIconTint" value="ff8c00"/>
             <property name="Tags" value="medical"/>
-            <property name="DisplayType" value="medicalVitamins"/>
+            <property name="DisplayType" value="medicalPainkillers"/>
             <property name="HoldType" value="16"/>
             <property name="Meshfile" value="#Other/Items?Health/painkillersPrefab.prefab"/>
             <property name="DropMeshfile" value="#Other/Items?Misc/sack_droppedPrefab.prefab"/>
             <property name="Material" value="Morganic"/>
-            <property name="EconomicValue" value="80"/>
-            <property name="Stacknumber" value="10"/> <!-- STK loot -->
+            <property name="EconomicValue" value="80"/> <!-- TODO: increase value -->
+            <property name="Stacknumber" value="10"/> <!-- TODO: decrease stack size -->
             <property name="Group" value="Science,CFChemicals,Medical"/>
             <property class="Action0">
                 <property name="Class" value="Eat"/>
@@ -17,15 +17,36 @@
                 <property name="Use_time" value="..."/>
 		        <property name="Sound_start" value="player_godspeed"/>
                 <property name="Create_item" value="drugGodspeed"/> <!-- TODO: remove; duplicate self for testing -->
+
+		        <!-- prevent stacking -->
+                <requirement name="NotHasBuff" buff="buffDrugGodspeed"/>
             </property>
+
+            <!-- <effect_group tiered="false" name="Drink Tier Found">
+                <requirement name="NotHasBuff" buff="buffIsOnFire"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$waterAmountAdd" operation="add" value="60"/>
+                <display_value name="dStaminaRegen" value=".15"/>
+                <display_value name="dRunSpeed" value=".5"/>
+                <display_value name="dDuration" value="120"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$buffMegaCrushDuration" operation="add" value="123"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$buffMegaCrushDuration" operation="set" value="363">
+                    <requirement name="CVarCompare" cvar="$buffMegaCrushDuration" operation="GT" value="363"/></triggered_effect>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffProcessConsumables,buffMegaCrush"/>
+            </effect_group> -->
+
             <effect_group tiered="false">
-                <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffFatiguedTrigger"/><display_value name="dStopsWeakness" value="1"/>
-                <display_value name="dDiseaseResist" value="1"/>
-                <display_value name="dDuration" value="720"/>
-                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$buffDrugVitaminsDuration" operation="add" value="723"/>
-                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$buffDrugVitaminsDuration" operation="set" value="2163">
-                    <requirement name="CVarCompare" cvar="$buffDrugVitaminsDuration" operation="GT" value="2163"/></triggered_effect>
-                <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffDrugVitamins"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffInjuryConcussion"/><display_value name="dStopsConcussion" value="1"/>
+                <display_value name="dInstantHealth" value="40"/>
+                <display_value name="dHealthLoss" value=".1"/>
+                <display_value name="$waterAmountAdd" value="-40"/>
+                <display_value name="dStunResist" value="1"/>
+                <!--180-->
+                <display_value name="dDuration" value="7"/>
+                <!--183-->
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$buffDrugGodspeedDuration" operation="add" value="10"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$buffDrugGodspeedDuration" operation="set" value="543">
+                    <requirement name="CVarCompare" cvar="$buffDrugGodspeedDuration" operation="GT" value="543"/></triggered_effect>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffDrugGodspeed"/>
             </effect_group>
         </item>
     </append>
