@@ -1,0 +1,108 @@
+<sleepless-godspeed>
+    <append xpath="/buffs">
+        <!--ui_game_symbol_agility-->
+        <buff name="buffDrugGodspeed" name_key="buffDrugGodspeedName" description_key="buffDrugGodspeedDesc" icon="ui_game_symbol_hand">
+            <stack_type value="replace"/><duration value="0"/>
+            <display_value value=".buffDrugGodspeedDisplay"/><display_value_format value="time"/>
+
+            <!--buff timer-->
+            <effect_group>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$buffDrugGodspeedDuration" operation="subtract" value="@$MetabolismDuration"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar=".buffDrugGodspeedDisplay" operation="set" value="@$buffDrugGodspeedDuration"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar=".buffDrugGodspeedDisplay" operation="divide" value="@$MetabolismDuration"/>
+            </effect_group>
+            <effect_group>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffDrugGodspeed">
+                    <requirement name="CVarCompare" cvar="$buffDrugGodspeedDuration" operation="LTE" value="0"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar=".buffDrugGodspeedDisplay" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$buffDrugGodspeedDuration" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$buffDrugGodspeedHealed" operation="set" value="0"/>
+            </effect_group>
+
+            <!-- <effect_group>
+                <requirement name="NotHasBuff" buff="buffInjuryConcussion"/>
+                <requirement name="CVarCompare" cvar="$buffDrugGodspeedHealed" operation="Equals" value="0"/>
+                    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="add" value="40"/>
+                    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$buffDrugGodspeedHealed" operation="set" value="1"/>
+            </effect_group> -->
+
+            <!-- <effect_group>
+                <passive_effect name="HealthLoss" operation="perc_add" value="-.1"/>
+                <passive_effect name="WaterChangeOT" operation="base_subtract" value="0.218"/>
+                <passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryStunned01CHTrigger,buffInjuryStunned00,buffInjuryStunned01,buffInjuryStunned01Shotgun,buffInjuryStunned02,buffInjuryStunned02Shotgun,buffInjuryStunned03,buffInjuryStunned03Shotgun"/>
+            </effect_group> -->
+
+            <!--positive effects to firearm handling-->
+            <effect_group>
+                <!--noticeable boost to reload speed-->
+                <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="1.00" tags="perkGunslinger,perkBoomstick,perkDeadEye,perkMachineGunner,perkBookAutoWeapons,perkTurrets,perkArchery,admin"/>
+                
+                <!--base boost to weapon handling in all scenarios-->
+                <passive_effect name="WeaponHandling" operation="perc_add" value=".75" tags="perkGunslinger,perkBoomstick,perkDeadEye,perkMachineGunner,perkBookAutoWeapons,perkTurrets,perkArchery,admin"/>
+                
+                <!--improve weapon handling while aiming-->
+                <passive_effect name="WeaponHandling" operation="perc_add" value=".5">
+                    <requirement name="HasBuff" buff="buffHoldBreathAiming01"/>
+                </passive_effect>
+
+                <!--reduce weapon kick while firing-->
+                <passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-.75"/>
+                <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-.75"/>
+                <passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-.75"/>
+                <passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-.75"/>
+
+                <!--reduce spread while moving-->
+                <passive_effect name="SpreadMultiplierCrouching" operation="perc_add" value="-.3"/>
+                <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-.3"/>
+                <passive_effect name="SpreadMultiplierWalking" operation="perc_add" value="-.3"/>
+            </effect_group>
+
+            <!--positive effects on movement-->
+            <effect_group>
+                <passive_effect name="CrouchSpeed" operation="perc_add" value=".25"/>
+                <passive_effect name="WalkSpeed" operation="perc_add" value=".50"/>
+                <passive_effect name="RunSpeed" operation="perc_add" value=".75"/>
+            </effect_group>
+
+            <!--positive effects on stamina-->
+
+            <!--effects on visuals-->
+            <effect_group>
+                <!-- <triggered_effect trigger="onSelfBuffUpdate" action="ShakeCamera" shake_speed="0.152" shake_amplitude="80" shake_time="4"/> -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyScreenEffect" effect_name="Dark" intensity="1" fade=".2"/>
+                <triggered_effect trigger="onSelfBuffRemove" action="ModifyScreenEffect" effect_name="Dark" intensity="0" fade=".2"/>
+
+                <!-- <triggered_effect trigger="onSelfBuffStart" action="ModifyScreenEffect" intensity=".5" fade=".2" effect_name="Blur"/> -->
+                <!-- <triggered_effect trigger="onSelfBuffRemove" action="ModifyScreenEffect" intensity="0" fade=".2" effect_name="Blur"/> -->
+                
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyScreenEffect" effect_name="Radiation" intensity=".1" fade=".2"/>
+                <triggered_effect trigger="onSelfBuffRemove" action="ModifyScreenEffect" effect_name="Radiation" intensity="0" fade=".2"/>
+                
+                <!-- <triggered_effect trigger="onSelfBuffStart" action="ModifyScreenEffect" effect_name="Infected" intensity="1" fade=".2"/> -->
+                <!-- <triggered_effect trigger="onSelfBuffRemove" action="ModifyScreenEffect" effect_name="Infected" intensity="0" fade=".2"/> -->
+
+                <!-- <triggered_effect trigger="onSelfBuffStart" action="ModifyScreenEffect" intensity="1" fade=".2" effect_name="Hot"/> -->
+                <!-- <triggered_effect trigger="onSelfBuffRemove" action="ModifyScreenEffect" intensity="0" fade=".2" effect_name="Hot"/> -->
+
+                <!-- <triggered_effect trigger="onSelfBuffStart" action="ModifyScreenEffect" intensity="1" fade=".2" effect_name="Cold"/> -->
+                <!-- <triggered_effect trigger="onSelfBuffRemove" action="ModifyScreenEffect" intensity="0" fade=".2" effect_name="Cold"/> -->
+            </effect_group>
+
+            <!--negative effects on metabolism-->
+            <effect_group>
+                <!-- regening stamina costs an extreme amount of water while buffed -->
+                <passive_effect name="WaterLossPerStaminaPointGained" operation="perc_add" value="120"/>
+
+                <!-- regening stamina costs an extreme amount of food while buffed -->
+                <passive_effect name="FoodLossPerStaminaPointGained" operation="perc_add" value="100"/>
+            </effect_group>
+
+            <!--aftereffects of using godspeed-->
+            <effect_group>
+                <triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffArmSprained"/>
+                <triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffLegSprained"/>
+            </effect_group>
+        </buff>
+    </append>
+</sleepless-godspeed>
